@@ -1,5 +1,6 @@
 package com.tutorial.todo.domain.todo.entity
 
+import com.tutorial.todo.application.todo.*
 import java.time.*
 import javax.persistence.*
 import kotlin.jvm.Transient
@@ -33,9 +34,22 @@ data class TodoList(
     @Column(name = "finish_yn")
     var finished: Boolean = false
 
-    companion object {
-        fun create() {
+    fun edit(command: TodoListEditCommand) {
+        title = command.title
+        content = command.content
+        startDateTime = command.startDateTime
+        endDateTime = command.endDateTime
+        finished = command.finished
+    }
 
+    companion object {
+        fun create(command: TodoListAddCommand) : TodoList {
+            return TodoList().apply {
+                title = command.title
+                content = command.content
+                startDateTime = command.startDateTime
+                endDateTime = command.endDateTime
+            }
         }
     }
 }
