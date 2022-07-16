@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.*
  * @author Seowon Yun
  */
 interface TodoListRepository: JpaRepository<TodoList, Int> {
-
 }

@@ -13,6 +13,7 @@ import kotlin.jvm.Transient
 data class TodoList(
     @Id
     @Column(name = "todo_list_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val no: Int = 0
 ) {
     @Column(name = "title")
