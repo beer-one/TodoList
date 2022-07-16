@@ -2,6 +2,7 @@ package com.tutorial.todo.application.todo
 
 import com.tutorial.todo.domain.todo.entity.*
 import com.tutorial.todo.domain.todo.repository.*
+import com.tutorial.todo.presentation.error.NotFoundException
 import org.springframework.data.domain.*
 import org.springframework.data.repository.*
 import org.springframework.stereotype.*
@@ -31,7 +32,7 @@ class TodoListCommandService(
         return Mono.fromCallable {
             transactionTemplate.executeWithoutResult {
                 repository.findByIdOrNull(no)?.edit(command)
-                    ?: throw RuntimeException("$no 번째 TodoList가 없습니다.")
+                    ?: throw throw NotFoundException("TodoList", no)
             }
         }
     }
@@ -42,7 +43,7 @@ class TodoListCommandService(
                 if (repository.existsById(no)) {
                     repository.deleteById(no)
                 } else {
-                    throw RuntimeException("$no 번째 TodoList가 없습니다.")
+                    throw throw NotFoundException("TodoList", no)
                 }
             }
         }
