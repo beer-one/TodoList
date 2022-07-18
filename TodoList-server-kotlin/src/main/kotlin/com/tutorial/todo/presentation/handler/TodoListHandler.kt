@@ -31,7 +31,6 @@ class TodoListHandler(
         val no = request.getTodoListNo()
 
         return queryService.getOne(no).flatMap { ok().bodyValue(it) }
-            .onErrorReturn(RuntimeException::class.java, notFound().buildAndAwait())
             .awaitSingle()
 
     }
@@ -52,14 +51,12 @@ class TodoListHandler(
                 )
             }
             .flatMap { noContent().build() }
-            .onErrorReturn(NotFoundException::class.java, notFound().buildAndAwait())
             .awaitSingle()
     }
 
     suspend fun deleteOne(request: ServerRequest): ServerResponse {
         return commandService.delete(request.getTodoListNo())
             .flatMap { noContent().build() }
-            .onErrorReturn(NotFoundException::class.java, notFound().buildAndAwait())
             .awaitSingle()
     }
 
