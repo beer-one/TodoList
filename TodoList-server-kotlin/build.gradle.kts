@@ -15,10 +15,6 @@ version = "1.0-SNAPSHOT"
 
 
 buildscript {
-//    repositories {
-//        maven(url = "https://plugins.gradle.org/m2/")
-//        mavenCentral()
-//    }
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
@@ -55,6 +51,10 @@ dependencies {
 
     // spring
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework:spring-web")
+    implementation("org.springframework.boot:spring-boot-autoconfigure")
+
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     // validator
     implementation("org.springframework.boot:spring-boot-starter-validation")
