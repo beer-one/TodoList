@@ -8,6 +8,8 @@ plugins {
     kotlin("kapt") version "1.3.61"
     kotlin("plugin.spring") version "1.3.72"
     kotlin("plugin.jpa") version "1.3.72"
+    id("war")
+    id("com.google.cloud.tools.jib") version "2.7.1"
 }
 
 group = "org.example"
@@ -81,4 +83,18 @@ dependencies {
     // test
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("io.mockk:mockk:1.9.3")
+}
+
+jib {
+    from {
+        image = "adoptopenjdk/openjdk11:alpine"
+    }
+    to {
+        image = "beer1/todo-server-kotlin"
+        tags = setOf("0.1.0")
+    }
+    container {
+        mainClass = "com.tutorial.todo.TodoListApplicationKt"
+        ports = listOf("8080")
+    }
 }
