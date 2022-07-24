@@ -10,9 +10,7 @@ import java.time.*
 data class TodoListEditRequest(
     val title: String,
     val content: String,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val startDateTime: LocalDateTime,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val endDateTime: LocalDateTime,
     val finished: Boolean
 ) {
