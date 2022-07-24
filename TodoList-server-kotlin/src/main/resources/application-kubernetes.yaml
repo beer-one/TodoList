@@ -13,3 +13,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+cors:
+  origins: "http://front.todo-list.svc.cluster.local"
+  maxAge: 3600
