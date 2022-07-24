@@ -37,7 +37,6 @@ repositories {
 tasks {
     withType<KotlinCompile> {
         kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "1.8"
         }
     }
@@ -78,7 +77,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-    testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient:2.0.3.RELEASE")
     testImplementation("com.ninja-squad:springmockk:1.1.0")
     // test
     testImplementation("io.projectreactor:reactor-test")
