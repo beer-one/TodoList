@@ -9,6 +9,7 @@ import org.springframework.data.domain.*
 import org.springframework.stereotype.*
 import org.springframework.web.reactive.function.server.*
 import org.springframework.web.reactive.function.server.ServerResponse.*
+import java.time.LocalDate
 
 /**
  * @author Seowon Yun
@@ -19,11 +20,11 @@ class TodoListHandler(
     private val commandService: TodoListCommandService
 ) {
 
-    suspend fun getPage(request: ServerRequest): ServerResponse {
-        val page = request.queryParamOrNull("page")?.toIntOrNull() ?: 1
-        val pageSize = request.queryParamOrNull("pageSize")?.toIntOrNull() ?: 10
+    suspend fun getByYearMonth(request: ServerRequest): ServerResponse {
+        val year = request.queryParamOrNull("year")?.toIntOrNull() ?: LocalDate.now().year
+        val month = request.queryParamOrNull("month")?.toIntOrNull() ?: LocalDate.now().monthValue
 
-        return ok().body(queryService.getPage(PageRequest.of(page-1, pageSize)))
+        return ok().body(queryService.getByYearMonth(year, month))
             .awaitSingle()
     }
 

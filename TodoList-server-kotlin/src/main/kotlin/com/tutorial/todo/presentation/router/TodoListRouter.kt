@@ -18,7 +18,7 @@ class TodoListRouter(
         return coRouter {
             "/todoList".nest {
                 accept(MediaType.APPLICATION_JSON).nest {
-                    GET("", handler::getPage)
+                    GET("", handler::getByYearMonth)
                     POST("", handler::add)
 
                     "/{todoListNo}".nest {
