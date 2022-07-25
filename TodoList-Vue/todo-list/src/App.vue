@@ -43,7 +43,7 @@ export default {
 
       client.getTodoPage(page, pageSize)
         .then(res => {
-          this.todoItems = res.data.items;
+          this.todoItems = res.data;
 
           let current = new Date();
 

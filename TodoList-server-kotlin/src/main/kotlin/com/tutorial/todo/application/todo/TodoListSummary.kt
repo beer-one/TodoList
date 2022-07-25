@@ -9,7 +9,7 @@ import java.time.*
 data class TodoListSummary(
     val no: Int,
     val title: String,
-    val startDatetime: LocalDateTime,
+    val startDateTime: LocalDateTime,
     val endDateTime: LocalDateTime,
     val finished: Boolean,
     val ended: Boolean
@@ -18,10 +18,10 @@ data class TodoListSummary(
         fun of(todoList: TodoList, current: LocalDateTime) = TodoListSummary(
             no = todoList.no,
             title = todoList.title,
-            startDatetime = todoList.startDateTime,
+            startDateTime = todoList.startDateTime,
             endDateTime = todoList.endDateTime,
             finished = todoList.finished,
-            ended = todoList.endDateTime.isAfter(current)
+            ended = current.isAfter(todoList.endDateTime)
         )
     }
 }
