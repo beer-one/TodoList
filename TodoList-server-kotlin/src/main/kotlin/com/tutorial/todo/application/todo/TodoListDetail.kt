@@ -10,7 +10,7 @@ data class TodoListDetail(
     val no: Int,
     val title: String,
     val content: String,
-    val startDatetime: LocalDateTime,
+    val startDateTime: LocalDateTime,
     val endDateTime: LocalDateTime,
     val finished: Boolean,
     val ended: Boolean
@@ -20,7 +20,7 @@ data class TodoListDetail(
             no = todoList.no,
             title = todoList.title,
             content = todoList.content,
-            startDatetime = todoList.startDateTime,
+            startDateTime = todoList.startDateTime,
             endDateTime = todoList.endDateTime,
             finished = todoList.finished,
             ended = todoList.endDateTime.isAfter(LocalDateTime.now())
