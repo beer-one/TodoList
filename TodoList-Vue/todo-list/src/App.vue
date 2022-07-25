@@ -12,6 +12,7 @@ import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoApiClient from '@/http/TodoApiClient.js'
+import DateFormatter from '@/utils/DateFormatter.js'
 
 export default {
   data () {
@@ -43,6 +44,13 @@ export default {
       client.getTodoPage(page, pageSize)
         .then(res => {
           this.todoItems = res.data.items;
+
+          let current = new Date();
+
+          this.todoItems.map(function(item){
+            item.proceeding = (current >= DateFormatter.toDate(item.startDateTime)) && (current < DateFormatter.toDate(item.endDateTime));
+            return item;
+          });
         });
     }
   },
