@@ -17,6 +17,13 @@ let DateFormatter = {
     const minute = toStr(date.getMinutes());
 
     return `${year}-${month}-${day} ${hour}:${minute}:00`;
+  },
+
+  toDate(dateString) {
+    let d = dateString.split(' ')[0].split('-');
+    let t = dateString.split(' ')[1].split(':');
+
+    return new Date(d[0], d[1] - 1, d[2], t[0], t[1], t[2]);
   }
 }
 
