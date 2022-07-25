@@ -12,9 +12,9 @@ class TodoApiClient {
     instance = this;
   }
 
-  getTodoPage(page, pageSize) {
+  getTodoItems(year, month) {
     return axios.get(
-      `${this.url}/todoList?page=${page}&pageSize=${pageSize}`
+      `${this.url}/todoList?year=${year}&month=${month}`
     );
   }
 

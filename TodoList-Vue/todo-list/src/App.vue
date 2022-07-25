@@ -18,19 +18,23 @@ export default {
   data () {
     return {
       todoItems: [],
-      page: 1,
-      pageSize: 30
+      year: 0,
+      month: 0
     }
   },
   created () {
-    this.pageTodoItems(this.page, this.pageSize)
+    const current = new Date();
+    this.year = current.getYear();
+    this.month = current.getMonth() + 1;
+
+    this.getTodoItems(this.Year, this.month)
   },
   methods: {
     addTodo (todoItem) {
       let client = new TodoApiClient()
       client.add(todoItem);
 
-      this.pageTodoItems(this.page, this.pageSize)
+      this.getTodoItems(this.page, this.pageSize)
     },
     removeTodo (todoItem, index) {
       let client = new TodoApiClient();
@@ -38,10 +42,10 @@ export default {
       client.removeTodo(todoItem.no);
       this.todoItems.splice(index, 1);
     },
-    pageTodoItems(page, pageSize) {
+    getTodoItems(page, pageSize) {
       let client = new TodoApiClient()
 
-      client.getTodoPage(page, pageSize)
+      client.getTodoItems(page, pageSize)
         .then(res => {
           this.todoItems = res.data;
 
