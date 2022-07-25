@@ -1,9 +1,7 @@
 package com.tutorial.todo.application.todo
 
-import com.tutorial.todo.application.PageResult
 import com.tutorial.todo.domain.todo.repository.*
 import com.tutorial.todo.presentation.error.NotFoundException
-import org.springframework.data.domain.*
 import org.springframework.data.repository.*
 import org.springframework.stereotype.*
 import reactor.core.publisher.*
@@ -16,14 +14,17 @@ import java.time.*
 class TodoListQueryService(
     private val repository: TodoListRepository
 ) {
-    fun getPage(pageable: Pageable): Mono<PageResult<TodoListSummary>> {
+    fun getByYearMonth(year: Int, month: Int): Mono<List<TodoListSummary>> {
         return Mono.fromCallable {
-            repository.findAll(pageable)
-        }.map { page ->
+            val (startDateTime, endDateTime) = LocalDate.of(year, month, 1).let {
+                LocalDateTime.of(it, LocalTime.MIN) to LocalDateTime.of(it.plusMonths(1), LocalTime.MIN).minusSeconds(1)
+            }
+            repository.findByStartDateTimeBetweenOrEndDateTimeBetween(startDateTime, endDateTime, startDateTime, endDateTime)
+        }.map { list ->
             val current = LocalDateTime.now()
-            PageResult(page.map {
+            list.map {
                 TodoListSummary.of(it, current)
-            })
+            }
         }
     }
 
