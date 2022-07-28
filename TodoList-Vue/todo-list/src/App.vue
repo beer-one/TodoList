@@ -2,6 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
+    <TodoCalendar></TodoCalendar>
     <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
   </div>
 </template>
@@ -9,6 +10,7 @@
 <script>
 import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
+import TodoCalendar from './components/TodoCalendar'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoApiClient from '@/http/TodoApiClient.js'
@@ -61,6 +63,7 @@ export default {
   components: {
     TodoHeader: TodoHeader,
     TodoInput: TodoInput,
+    TodoCalendar: TodoCalendar,
     TodoList: TodoList,
     TodoFooter: TodoFooter
   }
