@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TodoHeader></TodoHeader>
+    <TodoHeader v-bind:propsYear="year" v-bind:propsMonth="month" @toNextMonth="toNextMonth" @toPrevMonth="toPrevMonth"></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
   </div>
@@ -24,28 +24,30 @@ export default {
   },
   created () {
     const current = new Date();
-    this.year = current.getYear();
+    this.year = current.getFullYear();
     this.month = current.getMonth() + 1;
 
-    this.getTodoItems(this.Year, this.month)
+    this.getTodoItems(this.year, this.month)
   },
   methods: {
     addTodo (todoItem) {
       let client = new TodoApiClient()
       client.add(todoItem);
 
-      this.getTodoItems(this.page, this.pageSize)
+      this.getTodoItems(this.year, this.month)
     },
+
     removeTodo (todoItem, index) {
       let client = new TodoApiClient();
 
       client.removeTodo(todoItem.no);
       this.todoItems.splice(index, 1);
     },
-    getTodoItems(page, pageSize) {
+
+    getTodoItems(year, month) {
       let client = new TodoApiClient()
 
-      client.getTodoItems(page, pageSize)
+      client.getTodoItems(this.year, this.month)
         .then(res => {
           this.todoItems = res.data;
 
@@ -56,7 +58,27 @@ export default {
             return item;
           });
         });
-    }
+    },
+
+    toNextMonth() {
+      this.month++;
+      if (this.month > 12) {
+        this.month = 1;
+        this.year++;
+      }
+      
+      this.getTodoItems(this.year, this.month)
+    },
+
+    toPrevMonth() {
+      this.month--;
+      if (this.month < 1) {
+        this.month = 12;
+        this.year--;
+      }
+
+      this.getTodoItems(this.year, this.month)
+    },
   },
   components: {
     TodoHeader: TodoHeader,
@@ -69,6 +91,9 @@ export default {
 </script>
 
 <style>
+  header {
+    padding-bottom: 40px;
+  }
   body {
     text-align: center;
     background-color: #F6F6F8;
