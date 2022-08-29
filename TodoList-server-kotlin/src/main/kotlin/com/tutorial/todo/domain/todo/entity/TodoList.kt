@@ -1,6 +1,7 @@
 package com.tutorial.todo.domain.todo.entity
 
 import com.tutorial.todo.application.todo.*
+import com.tutorial.todo.domain.todo.converter.Yn2BooleanConverter
 import java.time.*
 import javax.persistence.*
 import kotlin.jvm.Transient
@@ -33,6 +34,7 @@ data class TodoList(
         private set
 
     @Column(name = "finish_yn")
+    @Convert(converter = Yn2BooleanConverter::class)
     var finished: Boolean = false
 
     fun edit(command: TodoListEditCommand) {
