@@ -7,6 +7,14 @@ let instance = null;
 class TodoApiClient {
   constructor() {
     this.url = process.env.VUE_APP_API_HOST;
+    axios.create({
+      baseURL: this.url,
+      timeout: 2000,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
 
     if (instance) return instance;
     instance = this;

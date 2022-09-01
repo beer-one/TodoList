@@ -50,6 +50,7 @@ export default {
       client.getTodoItems(this.year, this.month)
         .then(res => {
           this.todoItems = res.data;
+          console.log(res.data);
 
           let current = new Date();
 
@@ -66,7 +67,7 @@ export default {
         this.month = 1;
         this.year++;
       }
-      
+
       this.getTodoItems(this.year, this.month)
     },
 
