@@ -1,15 +1,15 @@
+import com.google.cloud.tools.jib.gradle.JibExtension
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
     kotlin("jvm") version "1.5.10"
     id("org.springframework.boot") version "2.6.7"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    kotlin("kapt") version "1.3.61"
-    kotlin("plugin.spring") version "1.3.72"
-    kotlin("plugin.jpa") version "1.3.72"
-    id("war")
-    id("com.google.cloud.tools.jib") version "2.7.1"
+    kotlin("kapt") version "1.7.10"
+    kotlin("plugin.spring") version "1.5.10"
+    kotlin("plugin.jpa") version "1.5.10"
+    id("com.google.cloud.tools.jib") version "2.8.0" apply false
 }
 
 group = "org.example"
@@ -19,30 +19,35 @@ version = "1.0-SNAPSHOT"
 buildscript {
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
     }
 }
-
-apply(plugin = "kotlin")
-apply(plugin = "io.spring.dependency-management")
-apply(plugin = "org.springframework.boot")
-apply(plugin = "kotlin-spring")
-apply(plugin = "kotlin-kapt")
-apply(plugin = "kotlin-jpa")
 
 repositories {
     mavenCentral()
 }
 
+tasks.getByName<BootJar>("bootJar") {
+    enabled = false
+}
+
 tasks {
     withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "1.8"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = JavaVersion.VERSION_11.majorVersion
         }
     }
 }
 
 dependencies {
+    apply(plugin = "com.google.cloud.tools.jib")
+    apply(plugin = "kotlin")
+    apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "kotlin-spring")
+    apply(plugin = "kotlin-kapt")
+    apply(plugin = "kotlin-jpa")
 
     implementation(kotlin("stdlib"))
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -83,9 +88,9 @@ dependencies {
     testImplementation("io.mockk:mockk:1.9.3")
 }
 
-jib {
+configure<JibExtension> {
     from {
-        image = "adoptopenjdk/openjdk11:alpine"
+        image = "openjdk:11-jdk-slim"
     }
     to {
         image = "beer1/todo-server-kotlin"
@@ -93,6 +98,7 @@ jib {
     }
     container {
         mainClass = "com.tutorial.todo.TodoListApplicationKt"
-        ports = listOf("8080")
+        ports = listOf("9000")
+        creationTime = "USE_CURRENT_TIMESTAMP"
     }
 }

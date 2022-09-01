@@ -35,7 +35,7 @@ class WebFluxConfig(
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
             .allowedOrigins(properties.origins)
-            .allowedMethods("GET", "OPTION", "HEAD", "POST", "PUT", "PATCH", "DELETE")
+            .allowedMethods("GET", "OPTIONS", "HEAD", "POST", "PUT", "PATCH", "DELETE")
             .maxAge(properties.maxAge.toLong())
     }
 
