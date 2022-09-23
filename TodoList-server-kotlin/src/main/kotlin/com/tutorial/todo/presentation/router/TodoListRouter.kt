@@ -5,9 +5,7 @@ import org.springframework.context.annotation.*
 import org.springframework.http.*
 import org.springframework.web.reactive.function.server.*
 
-/**
- * @author Seowon Yun
- */
+
 @Configuration
 class TodoListRouter(
     private val handler: TodoListHandler

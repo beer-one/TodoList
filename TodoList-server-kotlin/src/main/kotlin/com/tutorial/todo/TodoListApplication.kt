@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.*
 import org.springframework.boot.context.properties.*
 import org.springframework.web.reactive.config.*
 
-/**
- * @author Seowon Yun
- */
+
 
 @EnableWebFlux
 @ConfigurationPropertiesScan

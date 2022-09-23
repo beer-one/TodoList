@@ -3,9 +3,7 @@ package com.tutorial.todo.application.todo
 import com.tutorial.todo.domain.todo.entity.*
 import java.time.*
 
-/**
- * @author Seowon Yun
- */
+
 data class TodoListSummary(
     val no: Int,
     val title: String,

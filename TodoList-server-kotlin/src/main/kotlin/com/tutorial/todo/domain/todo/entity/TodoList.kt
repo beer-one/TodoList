@@ -6,9 +6,7 @@ import java.time.*
 import javax.persistence.*
 import kotlin.jvm.Transient
 
-/**
- * @author Seowon Yun
- */
+
 @Entity
 @Table(name = "TODO_LIST")
 data class TodoList(

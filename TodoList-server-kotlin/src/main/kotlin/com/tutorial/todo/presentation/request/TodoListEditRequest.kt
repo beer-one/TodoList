@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.tutorial.todo.application.todo.*
 import java.time.*
 
-/**
- * @author Seowon Yun
- */
+
 data class TodoListEditRequest(
     val title: String,
     val content: String,

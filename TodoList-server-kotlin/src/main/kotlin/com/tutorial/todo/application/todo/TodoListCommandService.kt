@@ -11,9 +11,7 @@ import reactor.core.publisher.*
 import java.lang.RuntimeException
 import java.time.*
 
-/**
- * @author Seowon Yun
- */
+
 @Service
 class TodoListCommandService(
     private val repository: TodoListRepository,

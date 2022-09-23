@@ -11,9 +11,7 @@ import org.springframework.web.reactive.function.server.*
 import org.springframework.web.reactive.function.server.ServerResponse.*
 import java.time.LocalDate
 
-/**
- * @author Seowon Yun
- */
+
 @Component
 class TodoListHandler(
     private val queryService: TodoListQueryService,

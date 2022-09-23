@@ -7,9 +7,7 @@ import org.springframework.stereotype.*
 import reactor.core.publisher.*
 import java.time.*
 
-/**
- * @author Seowon Yun
- */
+
 @Service
 class TodoListQueryService(
     private val repository: TodoListRepository
