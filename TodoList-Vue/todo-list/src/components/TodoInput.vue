@@ -4,10 +4,10 @@
 
     <input type="text" class="input-item" v-model="title" placeholder = "제목" v-on:keyup.enter="addTodo">
     <input type="text" class="input-item" v-model="content" placeholder = "내용" v-on:keyup.enter="addTodo">
-    <Datepicker class="datepicker input-item" v-model="startDateTime" :enableTimePicker="true"></Datepicker>
-    <Datepicker class="datepicker input-item" v-model="endDateTime" :enableTimePicker="true"></Datepicker>
+    <Datepicker class="datepicker input-item" v-model="startDateTime" placeholder = "시작 시간" :enableTimePicker="true"></Datepicker>
+    <Datepicker class="datepicker input-item" v-model="endDateTime" placeholder = "종료 시간" :enableTimePicker="true"></Datepicker>
     <span class="addContainer" v-on:click="addTodo">
-      <i class="addBtn fa fa-plus" aria-hidden="true"></i>
+      <i class="addBtn fa fa-pencil" aria-hidden="true"></i>
     </span>
 
   </div>
@@ -58,14 +58,13 @@ export default {
   input.focus {
     outline: none;
   }
+
   .inputBox {
     background: white;
     height: 50px;
     line-height: 50px;
-    border-radius: 5px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
     justify-content: flex-start;
   }
@@ -76,7 +75,7 @@ export default {
     padding-left: 15px;
   }
   .addContainer {
-    background: linear-gradient(to right, #6478FB, #8763FB);
+    background: #5d63FF;
     width: 3rem;
     border-radius: 0 5px 5px 0;
   }

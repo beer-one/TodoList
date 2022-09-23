@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="todolist">
     <ul class="table">
       <li v-for="(todoItem, index) in propsdata" class="shadow" v-bind:key="todoItem">
 
@@ -30,13 +30,15 @@ export default {
 </script>
 
 <style>
-  .table {
-    margin-top: 5px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #88bbff;
-    padding: 40px 10px 20px 10px;
+
+  .todolist {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #93bbff;
+    padding: 5px 10px;
+    height: auto;
   }
 
   ul {

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="todoapp">
     <TodoHeader v-bind:propsYear="year" v-bind:propsMonth="month" @toNextMonth="toNextMonth" @toPrevMonth="toPrevMonth"></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
@@ -95,17 +95,29 @@ export default {
   header {
     padding-bottom: 40px;
   }
+
   body {
     text-align: center;
-    background-color: #F6F6F8;
+    background-color: #fff;
   }
+
+  .todoapp {
+    background-color: #f0f0f0;
+    box-shadow: 2px 2px 2px 2px gray;
+    width: 70%;
+    height: 99vh;
+    display: inline-block;
+  }
+
   input {
     border-style: groove;
     width: 200px;
   }
+
   button {
     border-stype: groove;
   }
+
   .shadow {
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03)
   }
