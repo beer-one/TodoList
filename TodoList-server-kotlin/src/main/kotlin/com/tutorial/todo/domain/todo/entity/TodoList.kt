@@ -2,10 +2,8 @@ package com.tutorial.todo.domain.todo.entity
 
 import com.tutorial.todo.application.todo.*
 import com.tutorial.todo.domain.todo.converter.Yn2BooleanConverter
+import jakarta.persistence.*
 import java.time.*
-import javax.persistence.*
-import kotlin.jvm.Transient
-
 
 @Entity
 @Table(name = "TODO_LIST")

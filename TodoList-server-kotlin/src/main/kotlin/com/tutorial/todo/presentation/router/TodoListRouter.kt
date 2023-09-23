@@ -26,6 +26,11 @@ class TodoListRouter(
                     }
                 }
             }
+            "/test".nest {
+                accept(MediaType.APPLICATION_JSON).nest {
+                    GET("", handler::test)
+                }
+            }
         }
     }
 }

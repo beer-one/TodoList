@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    kubernetes:
+      secrets:
+        enable-api: true
+        sources:
+          - name: todo-api
+      config:
+        enabled: true
+        sources:
+          - name: todo-api

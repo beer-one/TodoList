@@ -1,4 +1,8 @@
 spring:
+  cloud:
+    kubernetes:
+      config:
+        enabled: false
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -6,7 +10,8 @@ spring:
     password: password
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-
 cors:
   origins: "http://localhost:8080"
   maxAge: 3600
+test:
+  data: local

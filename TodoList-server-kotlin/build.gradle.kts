@@ -1,25 +1,31 @@
 import com.google.cloud.tools.jib.gradle.JibExtension
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
-    kotlin("jvm") version "1.5.10"
-    id("org.springframework.boot") version "2.6.7"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    kotlin("kapt") version "1.7.10"
-    kotlin("plugin.spring") version "1.5.10"
-    kotlin("plugin.jpa") version "1.5.10"
-    id("com.google.cloud.tools.jib") version "2.8.0" apply false
+    val kotlinVersion = "1.7.10"
+    val springBootVersion = "3.1.3"
+    val dependencyManagementVersion = "1.1.0"
+    val jibVersion = "2.8.0"
+
+    kotlin("jvm") version kotlinVersion
+    kotlin("kapt") version kotlinVersion
+    kotlin("plugin.spring") version kotlinVersion
+    kotlin("plugin.jpa") version kotlinVersion
+
+    id("org.springframework.boot") version springBootVersion
+    id("io.spring.dependency-management") version dependencyManagementVersion
+    id("com.google.cloud.tools.jib") version jibVersion apply false
 }
+
+val springCloudVersion = "2022.0.3"
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
-
-buildscript {
-
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
     }
 }
 
@@ -35,7 +41,7 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = JavaVersion.VERSION_11.majorVersion
+            jvmTarget = JavaVersion.VERSION_17.majorVersion
         }
     }
 }
@@ -59,6 +65,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework:spring-web")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // spring-cloud
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+    implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-client-all")
 
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
@@ -70,13 +82,11 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5")
 
-    // jpa
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     runtimeOnly("com.h2database:h2")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("mysql:mysql-connector-java")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -90,7 +100,7 @@ dependencies {
 
 configure<JibExtension> {
     from {
-        image = "openjdk:11-jdk-slim"
+        image = "openjdk:17-jdk-slim"
     }
     to {
         image = "beer1/todo-server-kotlin"

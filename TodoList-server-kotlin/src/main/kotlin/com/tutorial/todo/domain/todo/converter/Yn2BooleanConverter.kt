@@ -1,7 +1,7 @@
 package com.tutorial.todo.domain.todo.converter
 
-import javax.persistence.AttributeConverter
-import javax.persistence.Converter
+import jakarta.persistence.AttributeConverter
+import jakarta.persistence.Converter
 
 @Converter
 class Yn2BooleanConverter: AttributeConverter<Boolean, String> {

@@ -63,7 +63,7 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
             .from(error.javaClass, MergedAnnotations.SearchStrategy.TYPE_HIERARCHY)[ResponseStatus::class.java]
 
         return if (error is ResponseStatusException) {
-            error.status
+            HttpStatus.valueOf(error.statusCode.value())
         } else responseStatusAnnotation.getValue("code", HttpStatus::class.java)
             .orElse(HttpStatus.INTERNAL_SERVER_ERROR)
     }

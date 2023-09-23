@@ -1,0 +1,18 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: todo-api
+  profiles:
+    active: local
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+management:
+  endpoint:
+    configprops:
+      show-values: always
+  endpoints:
+    web:
+      exposure:
+        include: health, configprops
