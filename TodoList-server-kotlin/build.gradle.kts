@@ -100,7 +100,7 @@ dependencies {
 
 configure<JibExtension> {
     from {
-        image = "openjdk:17-jdk-slim"
+        image = "openjdk:17-alpine"
     }
     to {
         image = "beer1/todo-server-kotlin"
